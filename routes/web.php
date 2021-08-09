@@ -13,6 +13,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+/*
+|--------------------------------------------------------------------------
+| Client Controller Routes
+|--------------------------------------------------------------------------
+*/
+Route::get('/', 'ClientSideController@index');
+
+/*
+|--------------------------------------------------------------------------
+| Admin Controller Routes
+|--------------------------------------------------------------------------
+*/
+Route::get('/admin/', 'AdminSideController@index');
+
+/*
+|--------------------------------------------------------------------------
+| Authorization Controller Routes
+|--------------------------------------------------------------------------
+*/
+Route::get('/login/', 'AuthorizationController@login');
+Route::get('/register/', 'AuthorizationController@register');
