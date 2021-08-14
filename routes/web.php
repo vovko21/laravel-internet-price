@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use \Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,19 +19,26 @@ use Illuminate\Support\Facades\Route;
 | Client Controller Routes
 |--------------------------------------------------------------------------
 */
-Route::get('/', 'ClientSideController@index');
+Route::get('/', 'ClientSideController@index')->name('home');
+Route::get('/view/{id}', 'ClientSideController@view')->name('view');
+Route::get('/cart', 'CartController@cart')->name('cart');
+Route::post('/cart/add/{id}', 'CartController@cartAdd')->name('cart-add');
+Route::post('/cart/remove/{id}', 'CartController@cartRemove')->name('cart-remove');
+Route::post('/cart/quantity/{id}/{quantity}', 'CartController@cartQuantity')->name('cart-quantity');
+Route::get('/cart/confirmation', 'CartController@cartConfirmation')->name('cart-confirmation');
+Route::post('/cart/confirm', 'CartController@cartConfirm')->name('cart-confirm');
 
 /*
 |--------------------------------------------------------------------------
 | Admin Controller Routes
 |--------------------------------------------------------------------------
 */
-Route::get('/admin/', 'AdminSideController@index');
-
+Route::middleware('check_role')->group(function () {
+    Route::get('/admin/', 'AdminSideController@index')->name('admin');;
+});
 /*
 |--------------------------------------------------------------------------
 | Authorization Controller Routes
 |--------------------------------------------------------------------------
 */
-Route::get('/login/', 'AuthorizationController@login');
-Route::get('/register/', 'AuthorizationController@register');
+Auth::routes();
