@@ -10,9 +10,15 @@ use Session;
 class Order extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'phone'
+    ];
+
     public function products_electro()
     {
-        return $this->belongsToMany(ProductElectro::class,'orders_product_electro')->withPivot('quantity')->withTimestamps();
+        return $this->belongsToMany(ProductElectro::class, 'orders_product_electro')->withPivot('quantity')->withTimestamps();
     }
 
     public function getFullPrice()

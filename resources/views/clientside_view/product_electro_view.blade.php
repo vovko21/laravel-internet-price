@@ -1,5 +1,8 @@
 @extends('layouts.master')
 
+<!-- Navigation-->
+@include('clientside_view.header')
+
 @section('content')
     <!-- Product section-->
     <section class="py-5">
@@ -146,4 +149,9 @@
             </div>
         </div>
     </section>
+@endsection()
+
+<!-- Footer-->
+@section('footer')
+    @include('clientside_view.footer')
 @endsection()

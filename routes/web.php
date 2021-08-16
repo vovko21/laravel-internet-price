@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use \Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Admin\AdminOrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,7 +35,13 @@ Route::post('/cart/confirm', 'CartController@cartConfirm')->name('cart-confirm')
 |--------------------------------------------------------------------------
 */
 Route::middleware('check_role')->group(function () {
-    Route::get('/admin/', 'AdminSideController@index')->name('admin');;
+    Route::get('/admin/', 'Admin\AdminSideController@index')->name('admin');
+    Route::get('/admin/notaccepted-orders', 'Admin\AdminOrderController@notAceptedOrders')->name('orders.notaccepted');
+    Route::post('/admin/orders/accept/{id}', 'Admin\AdminOrderController@acceptOrder')->name('orders.accept');
+    Route::post('/admin/orders/decline/{id}', 'Admin\AdminOrderController@declineOrder')->name('orders.decline');
+
+    Route::resource('admin/orders', 'Admin\AdminOrderController');
+    Route::resource('admin/products/electro', 'Admin\AdminProductElectroController');
 });
 /*
 |--------------------------------------------------------------------------

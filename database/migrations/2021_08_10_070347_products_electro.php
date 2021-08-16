@@ -18,15 +18,15 @@ class ProductsElectro extends Migration
             $table->string('name');
             $table->string('price_dollar');
             $table->string('price_uah');
-            $table->integer('quantity');
+            $table->integer('quantity')->default(0);
             $table->string('price_discount');
-            $table->string('site_url');
+            $table->string('site_url')->nullable();
             $table->string('code_UKTZED');
-            $table->integer('min');
-            $table->integer('packaging');
-            $table->integer('box');
+            $table->integer('min')->nullable();
+            $table->integer('packaging')->nullable();
+            $table->integer('box')->nullable();
             $table->id();
-            //$table->timestamps();
+            $table->timestamps();
         });
     }
 

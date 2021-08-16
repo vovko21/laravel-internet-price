@@ -4,23 +4,25 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use Illuminate\Http\Request;
+use App\Constants\Constants;
 use Session;
 
 class CartController extends Controller
 {
     public function cart()
     {
-        $order_id = Session('order_id');
+        $order_id = Session(Constants::$OrderId);
+        $order = null;
         if (!is_null($order_id)) {
             $order = Order::findOrFail($order_id);
-            Session(['order_id' => $order->id]);
+            Session([Constants::$OrderId => $order->id]);
         }
         return view('clientside_view/cart', compact('order'));
     }
 
     public function cartConfirmation()
     {
-        $orderId = session('order_id');
+        $orderId = session(Constants::$OrderId);
         if (is_null($orderId)) {
             return redirect()->route('index');
         }
@@ -30,13 +32,13 @@ class CartController extends Controller
 
     public function cartConfirm(Request $request)
     {
-        $orderId = session('order_id');
+        $orderId = session(Constants::$OrderId);
         if (is_null($orderId)) {
             return redirect()->route('/');
         }
         $order = Order::find($orderId);
         $success = $order->saveOrder($request->name, $request->phone);
-        session()->forget('order_id');
+        session()->forget(Constants::$OrderId);
 
         if ($success) {
             session()->flash('success', 'Ваш заказ принят в обработку!');
@@ -44,15 +46,15 @@ class CartController extends Controller
             session()->flash('warning', 'Случилась ошибка');
         }
 
-        return redirect()->route('/');
+        return redirect()->route('home');
     }
 
     public function cartAdd($product_id)
     {
-        $order_id = Session('order_id');
+        $order_id = Session(Constants::$OrderId);
         if (is_null($order_id)) {
             $order = Order::create();
-            Session(['order_id' => $order->id]);
+            Session([Constants::$OrderId => $order->id]);
         } else {
             $order = Order::find($order_id);
         }
@@ -70,7 +72,7 @@ class CartController extends Controller
 
     public function cartRemove($product_id)
     {
-        $orderId = session('order_id');
+        $orderId = session(Constants::$OrderId);
         if (is_null($orderId)) {
             return redirect()->route('cart');
         }
@@ -91,7 +93,7 @@ class CartController extends Controller
 
     public function cartQuantity($product_id, $quantity)
     {
-        $orderId = session('order_id');
+        $orderId = session(Constants::$OrderId);
         if (is_null($orderId)) {
             return redirect()->route('cart');
         }

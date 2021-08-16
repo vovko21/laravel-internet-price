@@ -7,8 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProductElectro extends Model
 {
-    protected $table = 'products_electro';
     use HasFactory;
+
+    protected $table = 'products_electro';
+    protected $fillable = [
+        'article',
+        'name',
+        'price_dollar',
+        'price_uah',
+        'price_discount',
+        'code_UKTZED'
+    ];
 
     public function getPriceByQuantity() {
         if (!is_null($this->pivot)) {
