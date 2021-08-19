@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
@@ -25,5 +26,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //Schema::defaultstringLength(191);
+        Blade::directive('routeactive', function ($route) {
+            return "<?php echo Route::currentRouteNamed($route) ? 'class=\"active nav-link\"' : 'class=\"nav-link\"' ?>";
+        });
     }
 }

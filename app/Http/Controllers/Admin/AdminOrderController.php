@@ -6,8 +6,10 @@ use App\Constants\Constants;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\OrderRequest;
 use App\Models\Order;
+use App\Notifications\OrderNotification;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Notification;
 
 class AdminOrderController extends Controller
 {
@@ -23,6 +25,7 @@ class AdminOrderController extends Controller
         if ($order != null) {
             $order->status = Constants::$OrderStatus['ACCEPTED'];
             $order->save();
+            Notification::send($order->user, new OrderNotification('info','Ваше замовлення [№'.$order->id.'] підтвердженно і передано на виконання'));
         }
         return redirect()->route('orders.index');
     }
@@ -33,6 +36,7 @@ class AdminOrderController extends Controller
         if ($order != null) {
             $order->status = Constants::$OrderStatus['ZERO'];
             $order->save();
+            Notification::send($order->user, new OrderNotification('info','Ваше замовлення не було підтвердженне'));
         }
         return redirect()->route('orders.index');
     }

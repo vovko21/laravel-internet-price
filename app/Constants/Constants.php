@@ -7,7 +7,7 @@ class Constants {
     public static $Admin = 'admin';
     public static $User = 'user';
 
-    public static $OrderStatus = array(
+    public static $OrderStatus = array (
         'ZERO' => 0,
         'CREATED' => 1,
         'ACCEPTED' => 2,

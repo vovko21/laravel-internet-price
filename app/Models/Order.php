@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use PHPUnit\Framework\MockObject\Stub\ReturnReference;
 use Session;
 
 class Order extends Model
@@ -15,6 +14,11 @@ class Order extends Model
         'name',
         'phone'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 
     public function products_electro()
     {
@@ -41,6 +45,20 @@ class Order extends Model
             $this->name = $name;
             $this->phone = $phone;
             $this->status = 1;
+            $this->save();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function saveOrderWithUser($name, $phone, $user_id)
+    {
+        if ($this->status == 0) {
+            $this->name = $name;
+            $this->phone = $phone;
+            $this->status = 1;
+            $this->user_id = $user_id;
             $this->save();
             return true;
         } else {

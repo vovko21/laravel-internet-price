@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Notifications\OrderNotification;
 use Illuminate\Http\Request;
 use App\Constants\Constants;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 use Session;
 
 class CartController extends Controller
@@ -37,13 +40,24 @@ class CartController extends Controller
             return redirect()->route('/');
         }
         $order = Order::find($orderId);
-        $success = $order->saveOrder($request->name, $request->phone);
+        $success = false;
+        if (Auth::check()) {
+            $success = $order->saveOrderWithUser($request->name, $request->phone, Auth::user()->id);
+        } else {
+            $success = $order->saveOrder($request->name, $request->phone);
+        }
         session()->forget(Constants::$OrderId);
 
         if ($success) {
-            session()->flash('success', 'Ваш заказ принят в обработку!');
+            session()->flash('success', 'Ваше замовлення прийнято в обробку!');
+            if (Auth::check()) {
+                Notification::send(Auth::user(), new OrderNotification('info','Ваше замовлення [№'.$order->id.'] прийнято в обробку!'));
+            }
         } else {
-            session()->flash('warning', 'Случилась ошибка');
+            session()->flash('warning', 'Невідома помилка');
+            if (Auth::check()) {
+                Notification::send(Auth::user(), new OrderNotification('error','Невідома помилка'));
+            }
         }
 
         return redirect()->route('home');

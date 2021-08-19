@@ -20,8 +20,14 @@ use App\Http\Controllers\Admin\AdminOrderController;
 | Client Controller Routes
 |--------------------------------------------------------------------------
 */
+/* Core */
 Route::get('/', 'ClientSideController@index')->name('home');
+Route::get('/products', 'ClientSideController@allProducts')->name('all.products');
+
+/* View */
 Route::get('/view/{id}', 'ClientSideController@view')->name('view');
+
+/* Cart */
 Route::get('/cart', 'CartController@cart')->name('cart');
 Route::post('/cart/add/{id}', 'CartController@cartAdd')->name('cart-add');
 Route::post('/cart/remove/{id}', 'CartController@cartRemove')->name('cart-remove');
@@ -29,18 +35,28 @@ Route::post('/cart/quantity/{id}/{quantity}', 'CartController@cartQuantity')->na
 Route::get('/cart/confirmation', 'CartController@cartConfirmation')->name('cart-confirmation');
 Route::post('/cart/confirm', 'CartController@cartConfirm')->name('cart-confirm');
 
+/* Orders */
+Route::get('/orders', 'OrdersController@index')->name('orders');
+
+/* Account */
+Route::middleware('auth')->get('/account/notifications', 'Auth\AccountController@notifications')->name('account.notifications');
+
 /*
 |--------------------------------------------------------------------------
 | Admin Controller Routes
 |--------------------------------------------------------------------------
 */
 Route::middleware('check_role')->group(function () {
-    Route::get('/admin/', 'Admin\AdminSideController@index')->name('admin');
+    /* Core */
+    Route::get('/admin', 'Admin\AdminSideController@index')->name('admin');
+
+    /* Orders */
     Route::get('/admin/notaccepted-orders', 'Admin\AdminOrderController@notAceptedOrders')->name('orders.notaccepted');
     Route::post('/admin/orders/accept/{id}', 'Admin\AdminOrderController@acceptOrder')->name('orders.accept');
     Route::post('/admin/orders/decline/{id}', 'Admin\AdminOrderController@declineOrder')->name('orders.decline');
-
     Route::resource('admin/orders', 'Admin\AdminOrderController');
+
+    /* ProductsElectro */
     Route::resource('admin/products/electro', 'Admin\AdminProductElectroController');
 });
 /*
