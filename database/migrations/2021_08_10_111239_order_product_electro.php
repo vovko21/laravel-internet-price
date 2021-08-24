@@ -28,6 +28,6 @@ class OrderProductElectro extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('orders_product_electro');
     }
 }

@@ -12,6 +12,11 @@ use Session;
 
 class CartController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth']);
+    }
+
     public function cart()
     {
         $order_id = Session(Constants::$OrderId);

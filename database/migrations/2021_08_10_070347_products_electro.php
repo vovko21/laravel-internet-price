@@ -37,6 +37,6 @@ class ProductsElectro extends Migration
      */
     public function down()
     {
-        Schema::drop('products_electro');
+        Schema::dropIfExists('products_electro');
     }
 }

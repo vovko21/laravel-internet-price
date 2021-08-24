@@ -75,14 +75,31 @@
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                         data-bs-target="#flush-collapseTwo" aria-expanded="false"
                                         aria-controls="flush-collapseTwo">
-                                    Щось
+                                    Релевантність
                                 </button>
                             </h2>
                             <div id="flush-collapseTwo" class="accordion-collapse collapse"
                                  aria-labelledby="flush-collapseTwo" data-bs-parent="#accordionFlushExample">
                                 <!--Body-->
                                 <div class="accordion-body">
-
+                                    <div class="form-check">
+                                        <input name="new" class="form-check-input" type="checkbox" value="{{request()->new}}" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            Нове
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input name="sale" class="form-check-input" type="checkbox" value="{{request()->sale}}" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            Знижка
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input name="hit" class="form-check-input" type="checkbox" value="{{request()->hit}}" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            Популярне
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
                         </div>

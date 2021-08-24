@@ -49,15 +49,15 @@
                         </ul>
                     </li>
                 </ul>
+                <!--Notifications-->
+                <a class="btn btn-outline-dark p-2 me-2" href="{{route('account.notifications') }}">
+                    <i class="far fa-bell"></i>
+                </a>
+                <!--Orders-->
+                <a class="btn btn-outline-dark p-2 me-2" href="{{route('orders') }}">
+                    <i class="far fa-list-alt"></i>
+                </a>
         @endif
-            <!--Notifications-->
-            <a class="btn btn-outline-dark p-2 me-2" href="{{route('account.notifications') }}">
-                <i class="far fa-bell"></i>
-            </a>
-            <!--Orders-->
-            <a class="btn btn-outline-dark p-2 me-2" href="{{route('orders') }}">
-                <i class="far fa-list-alt"></i>
-            </a>
             <!--Cart-->
             <a class="btn btn-outline-dark p-2" href="{{route('cart') }}">
                 <i class="bi-cart-fill"></i>

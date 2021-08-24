@@ -19,7 +19,6 @@
     @yield('includes')
 </head>
 <body>
-
 @if(session()->has('success'))
     <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
         <div id="success-toast" class="toast hide align-items-center text-white bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
@@ -39,13 +38,18 @@
         </div>
 @endif
 
-<!------------------------------------>
-@yield('content')
-<!------------------------------------>
+<!--------main-wraper--------->
+<div class="wrapper">
+    <!----------main-content--------->
+    <main class="main">
+        @yield('content')
+    </main>
+    <!------------------------------->
 
-<!------------------------------------>
-@yield('footer')
-<!------------------------------------>
+    <!-----------footer-------------->
+    @yield('footer')
+    <!------------------------------->
+</div>
 <!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->

@@ -18,18 +18,18 @@ class ClientSideController extends Controller
         $productsQuery = ProductElectro::query();
 
         if ($request->filled('price_from')) {
-            $productsQuery->where('price_uah', '>=', $request->price_from);
+            $productsQuery->where('price_uah', '>=', (int)$request->price_from);
         }
 
         if ($request->filled('price_to')) {
-            $productsQuery->where('price_uah', '<=', $request->price_to);
+            $productsQuery->where('price_uah', '<=', (int)$request->price_to);
         }
 
-//        foreach (['hit', 'new', 'recommend'] as $field) {
-//            if ($request->has($field)) {
-//                $productsQuery->where($field, 1);
-//            }
-//        }
+        foreach (['hit', 'new', 'sale'] as $field) {
+            if ($request->has($field)) {
+                $productsQuery->where($field, 1);
+            }
+        }
 
         $filteredProducts = $productsQuery->paginate(6)->withPath("?".$request->getQueryString());
         return view("clientside_view.all_products", compact('filteredProducts'));

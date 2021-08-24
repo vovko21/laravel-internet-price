@@ -19,7 +19,28 @@ class ProductElectro extends Model
         'code_UKTZED'
     ];
 
-    public function getPriceByQuantity() {
+    public function isNew()
+    {
+        return $this->new === 1;
+    }
+
+    public function isSale()
+    {
+        return $this->sale === 1;
+    }
+
+    public function isHit()
+    {
+         return $this->hit === 1;
+    }
+
+    public function isRecommended()
+    {
+        return $this->recommended === 1;
+    }
+
+    public function getPriceByQuantity()
+    {
         if (!is_null($this->pivot)) {
             return $this->pivot->quantity * $this->price_uah;
         }
