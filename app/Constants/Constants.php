@@ -3,7 +3,7 @@
 namespace App\Constants;
 
 class Constants {
-    public static $OrderId = 'order_id';
+    public static $Order = 'order';
     public static $Admin = 'admin';
     public static $User = 'user';
 

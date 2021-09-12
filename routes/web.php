@@ -29,8 +29,9 @@ Route::get('/view/{id}', 'ClientSideController@view')->name('view');
 
 /* Cart */
 Route::get('/cart', 'CartController@cart')->name('cart');
-Route::post('/cart/add/{id}', 'CartController@cartAdd')->name('cart-add');
-Route::post('/cart/remove/{id}', 'CartController@cartRemove')->name('cart-remove');
+Route::post('/cart/add/{product}', 'CartController@cartAdd')->name('cart-add');
+Route::post('/cart/remove/{product}', 'CartController@cartRemove')->name('cart-remove');
+Route::post('/cart/removefull/{product}', 'CartController@cartFullRemove')->name('cart-full-remove');
 Route::post('/cart/quantity/{id}/{quantity}', 'CartController@cartQuantity')->name('cart-quantity');
 Route::get('/cart/confirmation', 'CartController@cartConfirmation')->name('cart-confirmation');
 Route::post('/cart/confirm', 'CartController@cartConfirm')->name('cart-confirm');

@@ -21,7 +21,7 @@
                         quidem modi. Nam sequi consequatur obcaecati excepturi alias magni, accusamus eius blanditiis
                         delectus ipsam minima ea iste laborum vero?</p>
                     <div class="d-flex">
-                        <form class="d-flex" role="form" method="POST" action="{{ route('cart-add', $productsElectro->id) }}">
+                        <form class="d-flex" role="form" method="POST" action="{{ route('cart-add', ['product' => $productsElectro]) }}">
                             <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1"
                                    style="max-width: 3rem"/>
                             <button type="submit" class="btn btn-outline-dark flex-shrink-0">

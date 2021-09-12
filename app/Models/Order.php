@@ -65,4 +65,8 @@ class Order extends Model
             return false;
         }
     }
+
+    public function getId() {
+        return $this->id;
+    }
 }

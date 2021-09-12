@@ -21,7 +21,6 @@
                                     class="pull-right">(<strong>{{$order->count_products_electro()}}</strong>) items</span>
                                 <h5>Items in your cart</h5>
                             </div>
-
                             @foreach($order->products_electro as $product)
                                 <div class="ibox-content">
                                     <div class="table-responsive">
@@ -52,7 +51,7 @@
                                                     </dl>
 
                                                     <form role="form" method="POST"
-                                                          action="{{route('cart-remove', ['id' => $product->id])}}">
+                                                          action="{{route('cart-full-remove', ['product' => $product])}}">
                                                         <div class="m-t-sm">
                                                             <button class="btn btn-outline-dark"><i
                                                                     class="fa fa-gift"></i> Add gift package
@@ -72,7 +71,7 @@
                                                 <td width="65">
                                                     <div class="d-flex">
                                                         <form class="d-flex" role="form" method="POST"
-                                                              action="{{ route('cart-remove', ['id' => $product->id]) }}">
+                                                              action="{{ route('cart-remove', ['product' => $product]) }}">
                                                             <button type="submit" class="btn btn-outline-secondary">
                                                                 <i class="fas fa-chevron-left"></i>
                                                             </button>
@@ -80,11 +79,11 @@
                                                         </form>
                                                         {{--                                                <form class="d-flex" role="form" method="POST" action="{{ route('cart-quantity', ['id' => $product->id]) }}">--}}
                                                         <input type="number" class="form-control"
-                                                               value="{{ $product->pivot->quantity }}"
+                                                               value="{{ $product->quantity }}"
                                                                style="width: 60px" name="quantity" readonly>
                                                         {{--                                                </form>--}}
                                                         <form id="add-form" class="d-flex" role="form" method="POST"
-                                                              action="{{route('cart-add', ['id' => $product->id])}}">
+                                                              action="{{route('cart-add', ['product' => $product])}}">
                                                             <button type="submit" class="btn btn-outline-secondary">
                                                                 <i class="fas fa-chevron-right"></i>
                                                             </button>
@@ -94,7 +93,7 @@
 
 
                                                     <form id="add-form" class="d-flex" role="form" method="POST"
-                                                          action="{{route('cart-add', ['id' => $product->id])}}">
+                                                          action="{{route('cart-add', ['product' => $product])}}">
                                                         @csrf
                                                     </form>
                                                 </td>
